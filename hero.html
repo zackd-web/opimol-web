@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPIMOL - One Piece Community</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/opimol-logo.jpg') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#D42A2A', // Luffy's red
+                        secondary: '#FFD700', // Gold/Yellow
+                        accent: '#1E88E5', // Blue
+                        dark: '#111827',
+                        light: '#f9fafb'
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .text-shadow-lg {
+                text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+            }
+            .bg-blur {
+                backdrop-filter: blur(8px);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                background-image: linear-gradient(to right, #D42A2A, #FFD700);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .pirate-border {
+                border: 2px solid #FFD700;
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-dark text-light font-sans min-h-screen">
+
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+    <div class="absolute inset-0 z-0">
+        <img src="{{ asset('images/.jpg') }}" alt="" class="w-full h-full object-cover opacity-30">
+        <div class="absolute inset-0 bg-gradient-to-b from-primary/10 to-dark"></div>
+    </div>
+    <div class="container mx-auto px-4 z-10 text-center">
+        <h1 data-aos="zoom-in-up" class="text-5xl md:text-7xl font-bold mb-6 text-shadow-lg">
+            Selamat Datang di <span class="font-bold text-secondary mb-2">OPIMOL</span>
+        </h1>
+        <p  data-aos="zoom-in" class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-300">
+            Hanya disini, Komunitas One Piece ter-rame. Emang Seberapa rame nya? Ayo gabung aja biar bisa ikutan seru-seru barenga Nakama lain. 
+        </p>
+
+        <div class="flex flex-col md:flex-row justify-center gap-6 mb-16">
+            <!-- Primary Button -->
+            <a data-aos="zoom-in" data-aos-delay="400" href="#join" class="group relative">
+                <div class="absolute -inset-1 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                <button class="relative bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl">
+                    <i class="fas fa-anchor mr-3"></i>
+                    Bergabung Sekarang
+                </button>
+            </a>
+
+            <!-- Secondary Button -->
+            <a data-aos="zoom-in" href="#about" class="group relative">
+                <div class="absolute -inset-1 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                <button class="relative bg-white hover:bg-blue-50 text-red-500 font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl border-2 border-blue-200">
+                    <i class="fas fa-compass mr-3"></i>
+                    Jelajahi Website
+                </button>
+            </a>
+        </div>
+    </div>
+    </div>
+</section>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // Adjust for header height
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Scroll Animation
+        const scrollElements = document.querySelectorAll('.card-hover');
+
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (
+                elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+            );
+        };
+
+        const displayScrollElement = (element) => {
+            element.classList.add('animate-float');
+        };
+
+        const hideScrollElement = (element) => {
+            element.classList.remove('animate-float');
+        };
+
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 1.25)) {
+                    displayScrollElement(el);
+                } else {
+                    hideScrollElement(el);
+                }
+            });
+        };
+
+        window.addEventListener('scroll', () => {
+            handleScrollAnimation();
+        });
+
+        // Initialize on page load
+        handleScrollAnimation();
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>
+
+
+
+
+
+
